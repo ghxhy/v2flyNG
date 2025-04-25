@@ -1,12 +1,12 @@
 [submodule "hysteria"]
 	path = hysteria
 	url = https://github.com/apernet/hysteria
-[submodule "AndroidLibXrayLite"]
-	path = AndroidLibXrayLite
-	url = https://github.com/ghxhy/AndroidLibV2rayLite
 [submodule "badvpn"]
 	path = badvpn
 	url = https://github.com/XTLS/badvpn
 [submodule "libancillary"]
 	path = libancillary
 	url = https://github.com/shadowsocks/libancillary
+[submodule "AndroidLibV2rayLite"]
+	path = AndroidLibV2rayLite
+	url = https://github.com/ghxhy/AndroidLibV2rayLite
