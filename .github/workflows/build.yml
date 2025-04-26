@@ -36,7 +36,7 @@ jobs:
         echo "NDK_HOME=$ANDROID_HOME/ndk/29.0.13113456" >> $GITHUB_ENV
         sed -i '10i\
         \
-            ndkVersion = "29.0.13113456"' ${{ github.workspace }}/V2rayNG/app/build.gradle.kts
+            ndkVersion = "29.0.13113456"' ${{ github.workspace }}/V2flyNG/app/build.gradle.kts
 
     - name: Restore cached libtun2socks
       id: cache-libtun2socks-restore
@@ -59,7 +59,7 @@ jobs:
 
     - name: Copy libtun2socks
       run: |
-        cp -r ${{ github.workspace }}/libs ${{ github.workspace }}/V2rayNG/app
+        cp -r ${{ github.workspace }}/libs ${{ github.workspace }}/V2flyNG/app
 
     - name: Fetch AndroidLibXrayLite tag
       run: |
@@ -75,7 +75,7 @@ jobs:
         repository: '2dust/AndroidLibXrayLite'
         tag: ${{ env.CURRENT_TAG }}
         fileName: 'libv2ray.aar'
-        out-file-path: V2rayNG/app/libs/
+        out-file-path: V2flyNG/app/libs/
 
     - name: Restore cached libhysteria2
       id: cache-libhysteria2-restore
@@ -105,7 +105,7 @@ jobs:
 
     - name: Copy libhysteria2
       run: |
-        cp -r ${{ github.workspace }}/hysteria/libs ${{ github.workspace }}/V2rayNG/app
+        cp -r ${{ github.workspace }}/hysteria/libs ${{ github.workspace }}/V2flyNG/app
 
     - name: Setup Java
       uses: actions/setup-java@v4.7.0
@@ -115,7 +115,7 @@ jobs:
 
     - name: Build APK
       run: |
-        cd ${{ github.workspace }}/V2rayNG
+        cd ${{ github.workspace }}/V2flyNG
         echo "sdk.dir=${ANDROID_HOME}" > local.properties
         chmod 755 gradlew
         ./gradlew licenseFdroidReleaseReport
@@ -126,13 +126,13 @@ jobs:
       if: ${{  success() }}
       with:
         name: arm64-v8a
-        path: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/*/debug/*arm64-v8a*.apk
+        path: ${{ github.workspace }}/V2flyNG/app/build/outputs/apk/*/debug/*arm64-v8a*.apk
 
     - name: Upload to release
       uses: svenstaro/upload-release-action@v2
       if: github.event.inputs.release_tag != ''
       with:
-        file: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/*/debug/*arm64-v8a*.apk
+        file: ${{ github.workspace }}/V2flyNG/app/build/outputs/apk/*/debug/*arm64-v8a*.apk
         tag: ${{ github.event.inputs.release_tag }}
         file_glob: true
         prerelease: true
