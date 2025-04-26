@@ -61,9 +61,9 @@ jobs:
       run: |
         cp -r ${{ github.workspace }}/libs ${{ github.workspace }}/V2flyNG/app
 
-    - name: Fetch AndroidLibXrayLite tag
+    - name: Fetch AndroidLibV2rayLite tag
       run: |
-        pushd AndroidLibXrayLite
+        pushd AndroidLibV2rayLite
         CURRENT_TAG=$(git describe --tags --abbrev=0)
         echo "Current tag in this repo: $CURRENT_TAG"
         echo "CURRENT_TAG=$CURRENT_TAG" >> $GITHUB_ENV
@@ -72,7 +72,7 @@ jobs:
     - name: Download libv2ray
       uses: robinraju/release-downloader@v1.12
       with:
-        repository: '2dust/AndroidLibXrayLite'
+        repository: 'ghxhy/AndroidLibV2rayLite'
         tag: ${{ env.CURRENT_TAG }}
         fileName: 'libv2ray.aar'
         out-file-path: V2flyNG/app/libs/
@@ -88,7 +88,7 @@ jobs:
       if: steps.cache-libhysteria2-restore.outputs.cache-hit != 'true'
       uses: actions/setup-go@v5.4.0
       with:
-        go-version-file: 'AndroidLibXrayLite/go.mod'
+        go-version-file: 'AndroidLibV2rayLite/go.mod'
         cache: false
 
     - name: Build libhysteria2
